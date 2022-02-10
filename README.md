@@ -13,7 +13,7 @@ NuxtJS 让你构建你的下一个 Vue.js 应用程序变得更有信心。这�
 
 rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在于对seo的实现存在差异
 
-> 以下是我的项目配置，可以简单参考
+以下是我的项目配置，可以简单参考
 
 ```text
 ✨  Generating Nuxt.js project in tianjia-demo                                              // 是否在当前文件夹创建
@@ -62,7 +62,7 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
 
 #### 生命周期内window对象的调用
 
-> [参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
+[参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
 
 ![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy81NTMxMjExLWQxYTNlNWIzNmVlMDNmMDgucG5nP2ltYWdlTW9ncjIvYXV0by1vcmllbnQvc3RyaXB8aW1hZ2VWaWV3Mi8yL3cvNDYwL2Zvcm1hdC93ZWJw?x-oss-process=image/format,png)
 
@@ -93,12 +93,92 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'ant-design-vue/dist/antd.css'
+    'ant-design-vue/dist/antd.css',
+    '@/assets/css/global.less'
   ],
   
   ...
 }
 
+```
+
+
+#### 使用less
+
+```js
+// package.json
+{
+    ...
+    "dependencies": {
+        ...
+        "less": "^3.9.0",
+        "less-loader": "^5.0.0"
+    },
+    ...
+}
+
+// 控制台
+yarn
+
+// 组件内
+<style lang="less" scoped>
+.content {
+  background-color: #cccccc;
+  h2 {
+    font-size: 20px;
+    color: @orange;
+  }
+}
+</style>
+```
+
+#### 配置全局less变量
+
+控制台
+```js
+yarn add @nuxtjs/style-resources -D
+```
+
+./assets/css/variable.less
+
+```css
+@white: #ffffff;
+@orange: orange;
+...
+```
+
+./nuxt.config.js 文件
+
+```js
+export default {
+    ...
+    modules: [
+        '@nuxtjs/style-resources'
+    ],
+    
+    styleResources:{
+        less:[
+          './assets/css/variable.less'
+        ]
+    },
+    ...
+}
+
+```
+
+./page/index.vue
+
+```js
+...
+<style lang="less" scoped>
+.content {
+  background-color: #cccccc;
+  h2 {
+    font-size: 20px;
+    color: @orange;
+  }
+}
+</style>
 ```
 
 #### 配置全局的loaders
@@ -129,15 +209,90 @@ export default {
 
 ```
 
-#### 页面独立的head
+#### 动态路由
+在 Nuxt.js 里面定义带参数的动态路由，需要创建对应的以下划线作为前缀的 Vue 文件 或 目录。
+[官网路由文档](https://www.nuxtjs.cn/guide/routing)
+
+以下目录结构：
+
 ```
-// TODO
-// 组件
-export default {
-    name:"",
-    
+pages/
+--| _slug/
+-----| comments.vue
+-----| index.vue
+--| users/
+-----| _id.vue
+--| index.vue
+```
+
+Nuxt.js 生成对应的路由配置表为：
+
+```
+router: {
+  routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: 'pages/index.vue'
+    },
+    {
+      name: 'users-id',
+      path: '/users/:id?',
+      component: 'pages/users/_id.vue'
+    },
+    {
+      name: 'slug',
+      path: '/:slug',
+      component: 'pages/_slug/index.vue'
+    },
+    {
+      name: 'slug-comments',
+      path: '/:slug/comments',
+      component: 'pages/_slug/comments.vue'
+    }
+  ]
 }
 ```
+
+你会发现名称为 users-id 的路由路径带有 :id? 参数，表示该路由是可选的。如果你想将它设置为必选的路由，需要在 users/_id 目录内创建一个 index.vue 文件。
+
+
+#### 自定义布局
+
+可通过添加 layouts/default.vue 文件来扩展应用的默认布局。
+
+./layouts/default.vue 
+
+```html
+// 公共头尾，<nuxt />为内容块
+<template>
+    <header />
+    <nuxt />
+    <footer />
+</template>
+```
+
+可以通过编辑 layouts/error.vue 文件来定制化错误页面.
+
+./layouts/error.vue
+
+```html
+<template>
+    <div class="container">
+        <h1 v-if="error.statusCode === 404">页面不存在</h1>
+        <h1 v-else>应用发生错误异常</h1>
+        <nuxt-link to="/">首 页</nuxt-link>
+    </div>
+</template>
+
+<script>
+  export default {
+    props: ['error'],
+    layout: 'blog' // 你可以为错误页面指定自定义的布局
+  }
+</script>
+```
+
 
 #### 如何在vuex的actions内使用router，拿到全部的vuex状态？
 
@@ -169,7 +324,7 @@ export const actions = {
 
 #### axios的全局配置
 
-> [参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
+[参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
 
 安装依赖
 
@@ -243,28 +398,9 @@ export default function (app) {
 }
 ```
 
-#### 使用less
-
-```
-// TODO
-// 控制台
-npm install less less-loader --save-dev
-
-// 组件内
-<style lang="less" scoped>
-.search-box {
-  display: flex;
-  width: 100%;
-  a {
-    color: red;
-  }
-}
-</style>
-```
-
 #### 跳转
 
-> nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link
+nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link
 
 ```
 // 常规不传参
@@ -275,4 +411,27 @@ npm install less less-loader --save-dev
 
 // query跳转链接传参，课程管理页使用this.$route.query.id获取
 <nuxt-link :to="{ path:'/detail', query: { id: 1 }}">课程管理</nuxt-link>
+```
+
+#### 中间件
+
+TODO
+```
+```
+
+#### 开发环境与生产环境的全局变量设置
+
+```js
+let preUrl = "";
+// 开发环境
+if (process.env.NODE_ENV == "development") {
+    preUrl = DEVELOPMENT_URL;
+}
+//生产环境
+else if (process.env.NODE_ENV == "production") {
+    preUrl = PRODUCTION_URL;
+}
+
+export const PRE_URL = preUrl 
+
 ```

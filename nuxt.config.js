@@ -18,7 +18,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'ant-design-vue/dist/antd.css'
+    'ant-design-vue/dist/antd.css',
+    '@/assets/css/global.less'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -37,7 +38,14 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources:{
+    less:[
+      './assets/css/variable.less'
+    ]
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
