@@ -416,19 +416,71 @@ nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使�
 
 #### 中间件
 
-TODO
+中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。
+
+每一个中间件应放置在 middleware/ 目录。文件名的名称将成为中间件名称 (middleware/auth.js将成为 auth 中间件)。
+
+```js
+export default function (context) {
+    context.userAgent = process.server
+        ? context.req.headers['user-agent']
+        : navigator.userAgent
+}
+
+// context的值
+// $config: {_app: {…}}
+// app: {head: {…}, router: VueRouter, nuxt: {…}, render: ƒ, data: ƒ, …}
+// base: "/"
+// env: {}
+// error: ƒ ()
+// from: {name: 'detail', meta: Array(1), path: '/detail', hash: '', query: {…}, …}
+// isDev: true
+// isHMR: false
+// isStatic: false
+// next: ƒ ()
+// nuxtState: {layout: 'default', data: Array(1), fetch: {…}, error: null, serverRendered: true, …}
+// params: {}
+// payload: undefined
+// query: {}
+// redirect: ƒ (status, path, query)
+// route: {name: 'index', meta: Array(1), path: '/', hash: '', query: {…}, …}
+// userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36"
+// _errored: false
+// _redirected: false
 ```
+
+全局使用 ./nuxt.config.js
+
+```js
+module.exports = {
+  router: {
+    middleware: 'auth'
+  }
+}
 ```
+
+您也可以将 middleware 添加到指定的布局或者页面:
+
+pages/index.vue 或者 layouts/default.vue
+
+```js
+export default {
+  middleware: 'auth'
+}
+```
+
 
 #### 开发环境与生产环境的全局变量设置
 
 ```js
+
 let preUrl = "";
+
 // 开发环境
 if (process.env.NODE_ENV == "development") {
     preUrl = DEVELOPMENT_URL;
 }
-//生产环境
+// 生产环境
 else if (process.env.NODE_ENV == "production") {
     preUrl = PRODUCTION_URL;
 }

@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default {
+export default Vue.extend({
   name: "IndexPage",
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
   methods: {
     // 0 常规不传参 1 params路由传参 2 query跳转链接传参
     toDetail(type: 0 | 1 | 2) {
-      let searchKeyword = this.searchKeyword;
+      let searchKeyword = this.$data.searchKeyword;
       switch (type) {
         case 0:
           this.$router.push("/detail");
@@ -93,7 +93,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style lang="less" scoped>

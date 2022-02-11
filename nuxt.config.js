@@ -46,6 +46,10 @@ export default {
       './assets/css/variable.less'
     ]
   },
+  
+  router: {
+    middleware: 'auth'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
