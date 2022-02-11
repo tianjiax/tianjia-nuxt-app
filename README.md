@@ -400,18 +400,19 @@ export default function (app) {
 
 #### 跳转
 
-nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link
+nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使用请看demo内pages/index.vue
 
 ```
-// 常规不传参
-<nuxt-link to="/">首页</nuxt-link>
+// 常规不传参 = this.$router.push("/detail");
+<nuxt-link to="/detail">详情</nuxt-link>
 
-// params路由传参，搜索页使用this.$route.params.keyword获取
-<nuxt-link :to="{ name: 'Detail', params: { keyword: item.name }}">搜索页</nuxt-link>
+// params路由传参 = this.$router.push({name: 'detail', params: { keyword: searchKeyword }})，搜索页使用this.$route.params.keyword获取
+<nuxt-link :to="{ name: 'detail', params: { keyword: searchKeyword }}">搜索页</nuxt-link>
 
-// query跳转链接传参，课程管理页使用this.$route.query.id获取
+// query跳转链接传参 = this.$router.push({ path: "/detail", query: { id: "1" } });，课程管理页使用this.$route.query.id获取
 <nuxt-link :to="{ path:'/detail', query: { id: 1 }}">课程管理</nuxt-link>
 ```
+
 
 #### 中间件
 
