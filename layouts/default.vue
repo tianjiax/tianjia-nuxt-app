@@ -14,7 +14,19 @@
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 export default {
-  components: {Header, Footer},
+  components: { Header, Footer },
+  asyncData() {
+    // console.log(window); // 服务端报错
+  },
+  fetch() {
+    // console.log(window); // 服务端报错
+  },
+  created() {
+    // console.log(window); // undefined
+  },
+  mounted() {
+    console.log(window); // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+  },
 };
 </script>
 

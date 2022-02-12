@@ -1,15 +1,15 @@
 # Nuxt开发相关
 
-## Nuxt搭建
+# Nuxt搭建
 
 NuxtJS 让你构建你的下一个 Vue.js 应用程序变得更有信心。这是一个 开源 的框架，让 web 开发变得简单而强大。
 
 - [官方文档](https://nuxtjs.org/)
 - [中文文档](https://www.nuxtjs.cn/)
 
-## 注意点
+# 注意点
 
-### 搭建
+## 搭建
 
 rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在于对seo的实现存在差异
 
@@ -42,9 +42,9 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
 
 ```
 
-### 开发相关问题
+## 开发相关问题
 
-#### 自定义配置IP地址和端口
+### 自定义配置IP地址和端口
 
 ./package.json 文件
 
@@ -60,11 +60,13 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
 }
 ```
 
-#### 生命周期内window对象的调用
+### 生命周期内window对象的调用
 
 [参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
 
 ![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy81NTMxMjExLWQxYTNlNWIzNmVlMDNmMDgucG5nP2ltYWdlTW9ncjIvYXV0by1vcmllbnQvc3RyaXB8aW1hZ2VWaWV3Mi8yL3cvNDYwL2Zvcm1hdC93ZWJw?x-oss-process=image/format,png)
+
+./layouts/default.vue
 
 ```js
 export default {
@@ -83,7 +85,7 @@ export default {
 }
 ```
 
-#### 配置全局的css
+### 配置全局的css
 
 ./nuxt.config.js 文件
 
@@ -103,7 +105,7 @@ export default {
 ```
 
 
-#### 使用less
+### 使用less
 
 ```js
 // package.json
@@ -120,10 +122,9 @@ export default {
 // 控制台
 yarn
 
-// 组件内
+// 组件内 ./pages/detail.vue
 <style lang="less" scoped>
 .content {
-  background-color: #cccccc;
   h2 {
     font-size: 20px;
     color: @orange;
@@ -132,7 +133,7 @@ yarn
 </style>
 ```
 
-#### 配置全局less变量
+### 配置全局less变量
 
 控制台
 ```js
@@ -166,7 +167,7 @@ export default {
 
 ```
 
-./page/index.vue
+./pages/detail.vue
 
 ```js
 ...
@@ -181,7 +182,7 @@ export default {
 </style>
 ```
 
-#### 配置全局的loaders
+### 配置全局的loaders
 
 ./nuxt.config.js 文件
 
@@ -191,25 +192,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    loaders: [
-            {
-                test: /\.less$/,
-                include: [
-                    path.resolve(__dirname, './src')
-                ],
-                loaders: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader'
-                ]
-            }
-        ]
-  }
+    filenames: {
+      chunk: ({ isDev }) => (isDev ? '[name].js' : '[id].[contenthash].js')
+    }
 }
 
 ```
 
-#### 动态路由
+### 动态路由
 在 Nuxt.js 里面定义带参数的动态路由，需要创建对应的以下划线作为前缀的 Vue 文件 或 目录。
 [官网路由文档](https://www.nuxtjs.cn/guide/routing)
 
@@ -257,7 +247,7 @@ router: {
 你会发现名称为 users-id 的路由路径带有 :id? 参数，表示该路由是可选的。如果你想将它设置为必选的路由，需要在 users/_id 目录内创建一个 index.vue 文件。
 
 
-#### 自定义布局
+### 自定义布局
 
 可通过添加 layouts/default.vue 文件来扩展应用的默认布局。
 
@@ -294,7 +284,7 @@ router: {
 ```
 
 
-#### 如何在vuex的actions内使用router，拿到全部的vuex状态？
+### 如何在vuex的actions内使用router，拿到全部的vuex状态？
 
 vuex存放在/store内，具体使用[参考文档](https://www.nuxtjs.cn/guide/vuex-store)
 ```js
@@ -322,7 +312,7 @@ export const actions = {
 
 ```
 
-#### axios的全局配置
+### axios的全局配置
 
 [参考文章](https://blog.csdn.net/qq_38290251/article/details/106519985)
 
@@ -398,7 +388,7 @@ export default function (app) {
 }
 ```
 
-#### 跳转
+### 跳转
 
 nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使用请看demo内pages/index.vue
 
@@ -414,7 +404,7 @@ nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使�
 ```
 
 
-#### 中间件
+### 中间件
 
 中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。
 
@@ -470,7 +460,7 @@ export default {
 ```
 
 
-#### 开发环境与生产环境的全局变量设置
+### 开发环境与生产环境的全局变量设置
 
 ```js
 
