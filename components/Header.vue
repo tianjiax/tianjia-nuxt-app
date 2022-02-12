@@ -1,5 +1,8 @@
 <template>
-  <a-layout-header>Header</a-layout-header>
+  <a-layout-header>
+    <nuxt-link to="/">首 页</nuxt-link>
+    <span>Header</span>
+  </a-layout-header>
 </template>
 
 <script>

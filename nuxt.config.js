@@ -16,6 +16,27 @@ export default {
     ]
   },
 
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: [
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
+  ],
+
+  axios: {
+    proxy: true,
+    prefix: '/api', // baseURL
+    credentials: true,
+  },
+  proxy: {
+    '/api/': {
+      target: 'https://www.runoob.com', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      },
+    },
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'ant-design-vue/dist/antd.css',
@@ -24,7 +45,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '@/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -36,17 +58,12 @@ export default {
     '@nuxt/typescript-build',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/style-resources'
-  ],
-
-  styleResources:{
-    less:[
+  styleResources: {
+    less: [
       './assets/css/variable.less'
     ]
   },
-  
+
   router: {
     middleware: 'auth'
   },

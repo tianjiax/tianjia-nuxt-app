@@ -2,14 +2,8 @@
   <div class="content">
     <h2>这里是使用less变量的橘色标题</h2>
     <br />
-    <a-row type="flex" justify="center" align="top">
-      <a-col :span="6">
-        <p>params路由传参：{{ $route.params.keyword }}</p>
-      </a-col>
-      <a-col :span="6">
-        <p>query跳转链接传参：{{ $route.query.id }}</p>
-      </a-col>
-    </a-row>
+    <h2>params路由传参：{{ $route.params.keyword }}</h2>
+    <h2>query跳转链接传参：{{ $route.query.id }}</h2>
   </div>
 </template>
 
