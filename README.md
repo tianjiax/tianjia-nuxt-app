@@ -393,7 +393,7 @@ export default function (app) {
 
 #### 跳转
 
-nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使用请看demo内pages/index.vue
+nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使用请看demo内pages/nuxtLinkDemo.vue
 
 ```
 // 常规不传参 = this.$router.push("/detail");
