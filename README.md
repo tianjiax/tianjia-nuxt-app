@@ -54,7 +54,7 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
     "config": {
         "nuxt": {
             "host": "0.0.0.0",
-            "port": "3001"
+            "port": "8888"
         }
     }
 }
@@ -390,6 +390,8 @@ export default function (app) {
   axios.onError(error => {})
 }
 ```
+
+实际使用请看 ./page/axiosDemo.vue
 
 #### 跳转
 
