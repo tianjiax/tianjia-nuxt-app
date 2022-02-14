@@ -5,7 +5,7 @@
         <nuxt-link to="/nuxtLinkDemo">nuxt-link与router跳转的demo</nuxt-link>
       </li>
       <li><nuxt-link to="/todos">待办事项vuex的demo</nuxt-link></li>
-      <li><nuxt-link to="/axiosDemo">axios的Demo</nuxt-link></li>
+      <li><nuxt-link to="/axiosDemo">跨域axios的Demo</nuxt-link></li>
       <li>
         <nuxt-link to="/777/777/777">错误页</nuxt-link>
       </li>
