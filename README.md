@@ -48,7 +48,7 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
 
 ./package.json 文件
 
-```json
+```text
 {
     ...
     "config": {
@@ -68,7 +68,7 @@ rendering mode优先使用Universal，Universal 和 Spa 的区别也恰好就在
 
 ./layouts/default.vue
 
-```js
+```text
 export default {
   asyncData() {
     console.log(window) // 服务端报错
@@ -89,7 +89,7 @@ export default {
 
 ./nuxt.config.js 文件
 
-```js
+```text
 export default {
   ...
 
@@ -107,7 +107,7 @@ export default {
 
 #### 使用less
 
-```js
+```text
 // package.json
 {
     ...
@@ -136,13 +136,13 @@ yarn
 #### 配置全局less变量
 
 控制台
-```js
+```text
 yarn add @nuxtjs/style-resources -D
 ```
 
 ./assets/css/variable.less
 
-```css
+```text
 @white: #ffffff;
 @orange: orange;
 ...
@@ -150,7 +150,7 @@ yarn add @nuxtjs/style-resources -D
 
 ./nuxt.config.js 文件
 
-```js
+```text
 export default {
     ...
     modules: [
@@ -169,7 +169,7 @@ export default {
 
 ./pages/detail.vue
 
-```js
+```text
 ...
 <style lang="less" scoped>
 .content {
@@ -186,7 +186,7 @@ export default {
 
 ./nuxt.config.js 文件
 
-```js
+```text
 export default {
   ...
 
@@ -205,7 +205,7 @@ export default {
 
 以下目录结构：
 
-```
+```text
 pages/
 --| _slug/
 -----| comments.vue
@@ -217,7 +217,7 @@ pages/
 
 Nuxt.js 生成对应的路由配置表为：
 
-```
+```text
 router: {
   routes: [
     {
@@ -253,7 +253,7 @@ router: {
 
 ./layouts/default.vue 
 
-```html
+```text
 // 公共头尾，<nuxt />为内容块
 <template>
     <header />
@@ -266,7 +266,7 @@ router: {
 
 ./layouts/error.vue
 
-```html
+```text
 <template>
     <div class="container">
         <h1 v-if="error.statusCode === 404">页面不存在</h1>
@@ -287,7 +287,7 @@ router: {
 #### 如何在vuex的actions内使用router，拿到全部的vuex状态？
 
 vuex存放在/store内，具体使用[参考文档](https://www.nuxtjs.cn/guide/vuex-store)
-```js
+```text
 
 ...
 
@@ -318,13 +318,13 @@ export const actions = {
 
 安装依赖
 
-```
+```text
 npm install @nuxtjs/axios @nuxtjs/proxy --save
 ```
 
 ./nuxt.config.js
 
-```
+```text
 module.exports = {
   ...
   modules: [ 
@@ -356,7 +356,7 @@ module.exports = {
 
 组件内使用
 
-```
+```text
 export default {
     fetch ({ app }) {
         console.log(app.$axios)
@@ -373,7 +373,7 @@ export default {
 
 到此为止，我们并不需要在 plugins 配置 axios，但是如果要设置全局拦截器，那么就要新建一个/plugins/axios.js，同时在nuxt.config.js 文件中引入
 
-```
+```text
 export default function (app) {
   let axios = app.$axios; 
   // 基本配置
@@ -397,7 +397,7 @@ export default function (app) {
 
 nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使用请看demo内pages/nuxtLinkDemo.vue
 
-```
+```text
 // 常规不传参 = this.$router.push("/detail");
 <nuxt-link to="/detail">详情</nuxt-link>
 
@@ -415,7 +415,7 @@ nuxt 的路由跳转不建议用 router-link ，推荐用 nuxt-link。具体使�
 
 每一个中间件应放置在 middleware/ 目录。文件名的名称将成为中间件名称 (middleware/auth.js将成为 auth 中间件)。
 
-```js
+```text
 export default function (context) {
     context.userAgent = process.server
         ? context.req.headers['user-agent']
@@ -446,7 +446,7 @@ export default function (context) {
 
 全局使用 ./nuxt.config.js
 
-```js
+```text
 module.exports = {
   router: {
     middleware: 'auth'
@@ -458,7 +458,7 @@ module.exports = {
 
 pages/index.vue 或者 layouts/default.vue
 
-```js
+```text
 export default {
   middleware: 'auth'
 }
@@ -467,7 +467,7 @@ export default {
 
 #### 开发环境与生产环境的全局变量设置
 
-```js
+```text
 
 let preUrl = "";
 
